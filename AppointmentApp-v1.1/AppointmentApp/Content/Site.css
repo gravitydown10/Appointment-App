@@ -1,0 +1,53 @@
+﻿*{
+    margin:0;
+    padding:0;
+}
+
+body{
+    padding-top:65px;
+}
+.field-validation-error, .validation-summary-errors {
+    color: red;
+}
+#user{
+    color:greenyellow;
+}
+/*..................other css.......................*/
+
+
+.create_form {
+    padding: 20px;
+    border: 2px solid gray;
+    box-shadow: 20px 20px 20px black;
+}
+
+.create_form form input {
+    border-radius: 0;
+}
+
+
+/*....................................create account end......................................*/
+
+
+.login_form {
+    padding: 20px;
+    border: 2px solid gray;
+    box-shadow: 20px 20px 20px black;
+}
+
+    .login_form form input {
+        border-radius: 0;
+    }
+
+
+/*....................................login account end......................................*/
+
+
+
+.create_appointment {
+    padding: 20px;
+}
+
+.create_appointment form input {
+    border-radius: 0;
+}

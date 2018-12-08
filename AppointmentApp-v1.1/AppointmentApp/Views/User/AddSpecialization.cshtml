@@ -1,0 +1,30 @@
+﻿@model AppointmentApp.ViewModels.SpecializationViewModel
+@{
+    ViewBag.Title = "AddSpecialization";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="specialization">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-4 specialization_form">
+                @using (Html.BeginForm("StoreSpecialization", "User"))
+                {
+                    @Html.ValidationSummary(true, "Please follow the instructions below")
+                    <div class="form-group">
+                        @Html.LabelFor(u => u.SpecialField)
+                        @Html.DropDownListFor(u => u.SpecialField, new SelectList(Model.Specializations, "Id", "Name"), "Select Your Field", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(u => u.SpecialField)
+                    </div>
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(u => u.Id, new { value = Model.Id })
+                    <button class="btn btn-default">Edit</button>
+
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+

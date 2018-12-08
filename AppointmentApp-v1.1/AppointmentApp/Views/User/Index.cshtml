@@ -1,0 +1,86 @@
+﻿@model AppointmentApp.ViewModels.UserViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-offset-1 col-md-4 image">
+                @{
+                    if (Model.Image != null)
+                    {
+                        var base64 = Convert.ToBase64String(Model.Image.ImageContent);
+                        var imgSrc = string.Format("data: {0}; base64, {1}", Model.Image.ImageType, base64);
+
+                        <img src="@imgSrc" alt="profile image" style='height: 200px; width: 200px;' class="img-circle" />
+
+                    }
+                    else
+                    {
+                        <img src="~/imgs/circled-user-male-skin-type-1-2.png" alt="profile image" style='height: 200px; width: 200px;' class="img-circle" />
+                    }
+                }
+                <br />
+                <br />
+                @Html.ActionLink("change your image", "UploadPhoto", "User", null, new { @class = "btn btn-default" })
+            </div>
+            <div class="col-xs-12 col-md-6 content-panel table-responsive">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><b>Name</b></td>
+                            <td>@Model.User.Name</td>
+                        </tr>
+                        <tr>
+                            <td><b>Email</b></td>
+                            <td>@Model.User.Email</td>
+                        </tr>
+                        <tr>
+                            <td><b>Telephone</b></td>
+                            <td>@Model.User.Telephone</td>
+                        </tr>
+                        <tr>
+                            <td><b>Mobile</b></td>
+                            <td>@Model.User.Mobile</td>
+                        </tr>
+                        <tr>
+                            <td><b>Address</b></td>
+                            <td>@Model.User.Address</td>
+                        </tr>
+                        <tr>
+                            <td><b>Member Type</b></td>
+
+                            @if (Model.User.IsADoctor)
+                            {
+                                <td>Doctor</td>
+                            }
+                            else
+                            {
+                                <td>User</td>
+                            }
+                        </tr>
+                        <tr>
+
+
+                            @if (Model.User.IsADoctor)
+                            {
+                                <td><b>Specialized </b></td>
+                                <td>@Model.Specialization.Name</td>
+                            }
+                        </tr>
+                        <tr>
+                            <td>@Html.ActionLink("Edit Profile", "EditProfile", "User", new { id = Model.User.Id }, new { @class = "btn btn-primary" })</td>
+                            <td>@Html.ActionLink("Delete Profile", "DeleteProfile", "User", new { id = Model.User.Id }, new { @class = "btn btn-danger", @OnClick = "return confirm('Are you sure you to delete this Account?');" })</td>
+                         
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+

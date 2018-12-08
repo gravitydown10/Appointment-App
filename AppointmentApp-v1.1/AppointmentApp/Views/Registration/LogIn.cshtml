@@ -1,0 +1,33 @@
+﻿@model AppointmentApp.ViewModels.LogInViewModel
+@{
+    ViewBag.Title = "LogIn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="login_account">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-md-offset-4 col-md-4 login_form">
+                @using (Html.BeginForm("ValidateLogIn", "Registration"))
+                {
+                    @Html.ValidationSummary(true, "Please follow the instructions below")
+                    <div class="form-group">
+                        @Html.LabelFor(u => u.Email)
+                        @Html.TextBoxFor(u => u.Email, new { @class = "form-control", placeholder = "Your Email" })
+                        @Html.ValidationMessageFor(u => u.Email)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(u => u.Password)
+                        @Html.PasswordFor(u => u.Password, new { @class = "form-control", placeholder = "Password" })
+                        @Html.ValidationMessageFor(u => u.Password)
+                    </div>
+                    @Html.AntiForgeryToken()
+                    <button class="btn btn-default">Log In</button>
+                    @Html.ActionLink("Don't have an account?","Index")
+                }
+            </div>
+        </div>
+    </div>
+</section>
+

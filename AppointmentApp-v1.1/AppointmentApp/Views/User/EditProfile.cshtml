@@ -1,0 +1,38 @@
+﻿@model AppointmentApp.ViewModels.UserEditViewModel
+@{
+    ViewBag.Title = "EditProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="edit_profile">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                @using (Html.BeginForm("StoreEditProfile", "User"))
+                {
+                    @Html.ValidationSummary(true, "Please follow the instructions below")
+                    <div class="form-group">
+                        @Html.LabelFor(u => u.Telephone)
+                        @Html.TextBoxFor(u => u.Telephone, new { @class = "form-control ", placeholder = "Telephone Number" })
+                        @Html.ValidationMessageFor(u => u.Telephone)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(u => u.Mobile)
+                        @Html.TextBoxFor(u => u.Mobile, new { @class = "form-control ", placeholder = "Mobile Number" })
+                        @Html.ValidationMessageFor(u => u.Mobile)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(u => u.Address)
+                        @Html.TextAreaFor(u => u.Address, new { @class = "form-control", placeholder = "Your Address" })
+                        @Html.ValidationMessageFor(u => u.Address)
+                    </div>
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(u=>u.Id,new { value=Model.Id})
+                    <button class="btn btn-default">Edit Profile</button>
+
+                }
+            </div>
+        </div>
+    </div>
+</section>
+

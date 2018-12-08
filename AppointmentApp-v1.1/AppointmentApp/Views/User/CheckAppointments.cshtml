@@ -1,0 +1,67 @@
+﻿@model List<AppointmentApp.ViewModels.CheckAppointmentViewModel>
+@{
+    ViewBag.Title = "CheckAppointments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        @if (ViewBag.flag)
+        {
+            
+        }
+        else
+        {
+            @Html.ActionLink("sort by Date | ", "CheckAppointmentsByDate", "User", null, null);
+            @Html.ActionLink("sort by Doctor Name ", "CheckAppointmentsDoctor", "User", null, null);
+         }
+
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>User Name</td>
+                        <td>User Email</td>
+                        <td>Doctor Catagory</td>
+                        @if (ViewBag.flag)
+                        {
+                            <td>Patient Name</td>
+                        }
+                        else
+                        {
+                            <td>Doctor Name</td>
+                        }
+
+
+                        <td>Date</td>
+                        <td>Time</td>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.UserName</td>
+                            <td>@item.UserEmail</td>
+                            <td>@item.Specialist</td>
+                            @if (ViewBag.flag)
+                            {
+                                <td>@item.PatientName</td>
+                            }
+                            else
+                            {
+                                <td>@item.DoctorName</td>
+                            }
+
+                            <td>@item.Date.ToString("dd / MMM / yyyy")</td>
+                            <td>@item.Time</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿@model List<AppointmentApp.ViewModels.CheckAppointmentViewModel>
+@{
+    var items = (from z in Model
+                 select z).OrderByDescending(z => z.DoctorName).ToList();
+}
+@{
+    ViewBag.Title = "CheckAppointmentsDoctor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>User Name</td>
+                        <td>User Email</td>
+                        <td>Doctor Name</td>
+                        <td>Doctor Catagory</td>
+                        <td>Date</td>
+                        <td>Time</td>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var item in items)
+                    {
+                        <tr>
+                            <td>@item.UserName</td>
+                            <td>@item.UserEmail</td>
+                            <td>@item.DoctorName</td>
+                            <td>@item.Specialist</td>
+                            <td>@item.Date.ToString("dd / MMM / yyyy")</td>
+                            <td>@item.Time</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+

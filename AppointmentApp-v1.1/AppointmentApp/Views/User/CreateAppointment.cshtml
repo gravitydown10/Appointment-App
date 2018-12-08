@@ -1,0 +1,70 @@
+﻿@model AppointmentApp.ViewModels.AppointmentViewModel
+@{
+    ViewBag.Title = "CreateAppointment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="create_appointment">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-offset-4 col-md-4 create_appointment_form">
+
+                @using (Html.BeginForm("StoreAppointment", "User"))
+                {
+                    @Html.ValidationSummary(true, "Please follow the instructions below")
+
+                    <div class="form-group">
+                        @Html.LabelFor(u => u.SpecialId)
+                        @Html.DropDownListFor(u => u.SpecialId, new SelectList(Model.Specializations, "Id", "Name"), "Select Type", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(u => u.SpecialId)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(u => u.Appointment.DoctorId)
+                        @if (Model.Users != null)
+                        {
+                            @Html.DropDownListFor(u => u.Appointment.DoctorId, new SelectList(Model.Users, "Id", "Name"), new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            @Html.DropDownListFor(u => u.Appointment.DoctorId, new SelectList(" "), new { @class = "form-control" })
+                        }
+
+                        @Html.ValidationMessageFor(u => u.Appointment.DoctorId)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(u => u.Appointment.ScheduleId)
+                        @Html.DropDownListFor(u => u.Appointment.ScheduleId, new SelectList(Model.Schedules, "Id", "Time"), "Select Schedule", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(u => u.Appointment.ScheduleId)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(u => u.Appointment.Date)
+                        @Html.TextBoxFor(u => u.Appointment.Date, new { @class = "form-control", type = "Date" })
+                        @Html.ValidationMessageFor(u => u.Appointment.Date)
+                    </div>
+                    @Html.AntiForgeryToken()
+                    <button class="btn btn-primary">Create Appointment</button>
+
+
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#SpecialId").change(function () {
+                $.get("/User/GetDoctors", { spId: $("#SpecialId").val() }, function (data) {
+                    $("#Appointment_DoctorId").empty();
+                    $.each(data, function (index, row) {
+                        $("#Appointment_DoctorId").append("<option value='" + row.Id + "'>" + row.Name + "</option>");
+                    });
+
+                });
+            });
+
+        });
+    </script>
